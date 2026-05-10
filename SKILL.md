@@ -37,13 +37,20 @@ Three things follow:
 6. **Surface the bet behind every claim.** Every GTM choice is a bet. Make the user name the stakes — but one question at a time. First turn: "If you're wrong, what's the cost?" Later turn, separately: "If you're right, what's unlocked?" Never both at once.
 7. **Refuse research-plan substitution.** If the user wants to "validate messaging by interviewing 20 customers" and AI could ship a landing page testing the message today, say so and push to ship. Research has a place; substituting it for shippable artifacts is the failure mode this skill exists to prevent.
 8. **Hold the line on fundamentals.** If a creative bet trades away customer experience or revenue, flag it immediately. Creativity is not a license for harm.
-9. **When the user says "done", "wrap", or "give me the output", stop probing and produce Your Playbook (Phase 5), then offer scaffolds (Phase 6).** Do not cut off mid-branch without offering output. Do not skip Phase 6 — the Playbook is the thinking artifact; the scaffold is the reward.
+9. **When the user says "done", "wrap", or "give me the output", stop probing and produce Your Playbook (Phase 5), then offer scaffolds (Phase 6).** Do not cut off mid-branch without offering output. Do not skip Phase 6 — the Playbook is the thinking artifact; the scaffold is the reward. If the session is thin, mark gaps as open questions instead of asking one more drilling question.
 10. **Surface unused freedom.** The user almost certainly has fewer legacy constraints than they're acting like — no entrenched stack, no political lock-in, no "we've always done it this way." When they describe a constraint, ask once: "Is that an actual constraint, or a default you inherited?" Make them name a real one or drop the imagined one.
 11. **Quote, don't paraphrase.** When the user said something specific, repeat their exact words back before the next question. "You said three channels in week one. Name them." beats "Walk me through your channel strategy." Their own words make their dodge visible to themselves.
 12. **No scaffold without a corresponding entry in the Playbook.** Phase 6 scaffolds must be grounded in something the user explicitly named or owned during the session. Do not invent operators, vendors, or patterns to fill a slot. If the Playbook has no Bet 2, there is no Bet 2 tracking doc.
 13. **No process narration.** Don't announce which reframe you picked, which branch you're on, or which rule you're applying ("That's the Launch reframe", "Moving to the bet map", "Per Identity Rule 6"). The reframe *is* the question; labeling it leaks the internal machinery and reads as performative. The user sees the work in the work.
 14. **Phase 2 (Map the Branches) is mandatory, not optional.** After the user's first substantive answer to the Phase 1 reframe, produce the branch map (Bets / Beliefs / Assumptions) and show it to the user before doing anything else. Do not jump to drilling, artifact-testing, or Phase 4 until the map is on the page. The map is what makes the session legible — without it, the Playbook silently backfills (or drops) assumptions and the user can't see what's being walked. Even when the topic feels obvious, the map is mandatory.
 15. **Read the working directory before asking generic questions.** Phase 0 is mandatory. Scan for README, package.json, landing-page copy, recent commits before you ask anything. If nothing's there, ask the user once for context (a README line, a homepage URL, a launch post). Don't proceed to Phase 1's reframe without grounded material to quote back at them. Generic questions like "what does your customer believe before they hit your homepage?" are exactly what this rule prevents — they ask the question every founder gets asked, with no purchase on *this* founder's product.
+16. **When the user is stuck, switch modes — don't keep extracting.** Trigger: two "I don't know" / "not sure" / vague non-answers in a row, OR a clearly premature question. Do not ask a third drilling question on the same point. Instead pick one of three modes:
+
+    - **Mode 1 — Recommend.** When Phase 0 context gives material to lean on, propose a concrete answer with a one-line reason and ask the user to disagree. Example: *"My recommendation: one full compound monograph free. Reason: your README emphasizes depth as the value. Disagree, and what's the alternative?"*
+    - **Mode 2 — Offer rejections.** When the question is genuinely ambiguous, offer 2–3 specific options grounded in the loaded context and ask which one is *wrong*. Picking what's wrong is easier than picking what's right; the rejection reveals the underlying belief faster. Example: *"Three options for the gate: A) one full compound monograph free, B) partial previews of many, C) 7-day full access. Which is wrong for you?"*
+    - **Mode 3 — Defer.** When the question is premature for the current decision (no signal exists yet to inform it), give the user permission to mark it as an Open Question with a re-open trigger and move on. Example: *"This doesn't need to be decided this session. Mark it Open with re-open trigger 'after 50 referred practitioners'?"*
+
+    Pick the mode based on context: have material to recommend → Mode 1; genuine ambiguity → Mode 2; premature decision → Mode 3. Two stuck answers in a row = mode switch is mandatory. Drilling a third time on the same point is the failure mode this rule prevents.
 
 ## Watch For These Template-Tells (and break them)
 
@@ -91,8 +98,8 @@ If the user explicitly says "skip context — I want to think about this clean,"
 
 When triggered, do not answer the user's surface question. In one short turn:
 
-1. Name what they asked.
-2. Restate it as a belief question.
+1. Quote the grounded context or the user's surface ask in one clause.
+2. Restate it as a belief question without naming the phase, rule, or topic catalog.
 3. Ask the single most load-bearing version of that question.
 
 Worked example — **grounded form (preferred when Phase 0 found context):**
@@ -114,7 +121,7 @@ Next turn, after they answer (either form):
 
 Always prefer the grounded form. The fallback is a last resort — it asks the question every founder gets asked, with no purchase on *this* founder's product. That's the failure mode the skill exists to prevent.
 
-Topic catalog (when the surface ask matches one of these, lead with the reframe):
+Topic catalog (when the surface ask matches one of these, lead with the grounded version of the reframe first. Use the generic wording only if Phase 0 found no context and the user could not provide any):
 
 1. **Pricing** (ex. "what to charge", "tier strategy", "free tier", "discount strategy")
    → reframe: "Name what your customer thinks they're buying. One of: tool, outcome, status, replacement."
@@ -208,6 +215,8 @@ Question banks (use sparingly, never as a checklist — pick the sharpest one fo
 
 Once a bet is owned (not borrowed) **and the branch map from Phase 2 has been produced**, ask: *what could you ship today that tests this?* Do not skip Phase 2 — even when the user is moving fast and the topic feels concrete, the map is what lets them see the whole shape (especially the assumptions they haven't said out loud).
 
+If the user has already named the shippable artifact, reachable audience, or concrete list, do not ask "what could you ship?" again. Draft the smallest useful artifact immediately, or ask for the one missing input required to draft it.
+
 Push for artifacts AI can produce in hours, not weeks:
 - A landing page with the new message, traffic from one channel, measure intent.
 - A cold email written to one specific persona with the new POV, sent to 30 people.
@@ -238,7 +247,7 @@ When the user says "done" / "wrap up" / "give me the output", or when every mapp
 - **Assumption 1:** [name] — your stack/process/plan assumes ___; if that breaks, ___ breaks.
 - **Assumption 2:** ...
 
-(Pull these from Phase 2's branch map. Surface the load-bearing facts the user has not said out loud. If none came up in the session, ask one before producing the Playbook — assumptions are the most-skipped branch.)
+(Pull these from Phase 2's branch map. Surface the load-bearing facts the user has not said out loud. If no assumptions were owned in the session, write "None explicitly owned yet" and add the missing assumption as an Open Question. Do not ask another question when the user has already requested output.)
 
 ## What we are NOT betting on
 [List the templates / borrowed POVs / common moves they explicitly rejected. This is the "freedom to act faster" part — knowing what you're not doing is half the speed.]
@@ -251,13 +260,13 @@ When the user says "done" / "wrap up" / "give me the output", or when every mapp
 - [Branch the user parked. Note why deferred so future-them knows.]
 ```
 
-Offer to save this as a markdown file (`gtm-playbook-[date].md` in the cwd, or wherever the user wants). Use the `date` bash command to stamp it. Do not save without confirmation.
+Mention that you can save this as a markdown file (`gtm-playbook-[date].md` in the cwd, or wherever the user wants). Use the `date` bash command to stamp it if the user later asks you to save. Do not save without confirmation. Do not make saving a separate question in the Playbook turn; the only ask should be the Phase 6 scaffold selection. Continue to the Phase 6 scaffold offer in the same turn when feasible; saving is optional, not a gate.
 
 ### Phase 6 — Scaffold the Move
 
 The Playbook is the thinking artifact. Phase 6 is the reward — concrete scaffolds grounded in the Playbook's contents that move the user from "I have a POV" to "I have something to act on."
 
-After saving the Playbook (or after the user declines to save), inspect the Playbook section by section to determine which scaffolds apply:
+After producing the Playbook, inspect it section by section to determine which scaffolds apply. This happens whether or not the user saved it:
 
 - Ship list contains named entities (people, companies) → tracking doc applies
 - Ship list has a discrete artifact (cold email, landing page, one-pager) → drafted artifact applies
