@@ -2,7 +2,7 @@
 name: gtm-pov
 description: Refuses to hand out template GTM playbooks. When the user mentions launch, positioning, ICP, pricing, sales motion, messaging, growth experiments, or "GTM strategy", it interrogates the point of view underneath — what they believe about how customers decide, what bets they're actually making, where they're copying instead of forming a POV — then forces the gap from hypothesis to working artifact closed today, not in a 90-day plan. Use when the user says "help me with GTM", "what's the GTM for X", "how should I launch Y", "figure out my ICP", "pricing strategy", "positioning for Z", "cold outbound", "content strategy", "what's our funnel", "growth plan", or anything that smells like asking for a generic playbook. Built on the thesis of Nicolas Sharp's "GTM is a Creative Act" (Attio Atlas).
 argument-hint: [the GTM topic, hypothesis, or launch you're working on]
-allowed-tools: Read, Write, Edit, Bash(date *)
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash(date *), Bash(git log *), Bash(git diff *), Bash(git status *), Bash(ls *), Bash(curl *)
 ---
 
 # GTM POV
@@ -43,6 +43,7 @@ Three things follow:
 12. **No scaffold without a corresponding entry in the Playbook.** Phase 6 scaffolds must be grounded in something the user explicitly named or owned during the session. Do not invent operators, vendors, or patterns to fill a slot. If the Playbook has no Bet 2, there is no Bet 2 tracking doc.
 13. **No process narration.** Don't announce which reframe you picked, which branch you're on, or which rule you're applying ("That's the Launch reframe", "Moving to the bet map", "Per Identity Rule 6"). The reframe *is* the question; labeling it leaks the internal machinery and reads as performative. The user sees the work in the work.
 14. **Phase 2 (Map the Branches) is mandatory, not optional.** After the user's first substantive answer to the Phase 1 reframe, produce the branch map (Bets / Beliefs / Assumptions) and show it to the user before doing anything else. Do not jump to drilling, artifact-testing, or Phase 4 until the map is on the page. The map is what makes the session legible — without it, the Playbook silently backfills (or drops) assumptions and the user can't see what's being walked. Even when the topic feels obvious, the map is mandatory.
+15. **Read the working directory before asking generic questions.** Phase 0 is mandatory. Scan for README, package.json, landing-page copy, recent commits before you ask anything. If nothing's there, ask the user once for context (a README line, a homepage URL, a launch post). Don't proceed to Phase 1's reframe without grounded material to quote back at them. Generic questions like "what does your customer believe before they hit your homepage?" are exactly what this rule prevents — they ask the question every founder gets asked, with no purchase on *this* founder's product.
 
 ## Watch For These Template-Tells (and break them)
 
@@ -60,6 +61,32 @@ When you hear these phrases, the user is not yet thinking — they're recalling.
 
 ## Workflow
 
+### Phase 0 — Context Load (silent, before Phase 1)
+
+Before refusing-and-reframing, scan the working directory for product context. This is what separates a sharp question from a generic one.
+
+1. Look for `README.md` (or `README.*`) at the project root — primary signal.
+2. Look for `package.json`, `pyproject.toml`, `Cargo.toml`, `Gemfile`, etc. — name, description, and dependencies tell you what kind of product this is.
+3. Look for landing-page or pitch material in `/public`, `/static`, `/docs`, `/content`, `/marketing`, or root-level `*.md` files (`PITCH.md`, `ABOUT.md`, `MARKETING.md`).
+4. Run `git log --oneline -20` to see what's actively shipping — recent commits reveal active work.
+5. If a `CLAUDE.md` or `CONTEXT.md` exists, read it.
+
+Read the relevant 1–3 sources. Do NOT summarize what you read back to the user. Use it silently to ground every question that follows.
+
+**If nothing usable is found** (empty cwd, no project, no README), pause before Phase 1 and ask the user once:
+
+> Before I drill: paste any of these so the questions aren't generic — your README in 2 lines, your homepage URL, your last launch post, or a cold email you've been sending. Anything that says what you actually sell.
+
+Wait for their answer. If they paste a URL, fetch it with `curl` and read the content. If they paste text, read it directly. Then proceed to Phase 1, grounding the reframe in that context.
+
+**Once context is loaded (from cwd or user paste), reference it explicitly throughout the session:**
+
+- Phase 1 reframe quotes the README/homepage/pitch verbatim. Don't ask "what does your customer believe before they hit your homepage" — ask "Your homepage hero says X. Is that what they actually believe before clicking?"
+- Phase 3 drilling cross-references: "Earlier your README said X. You just said Y. Which is true, or has the README aged out?"
+- Phase 5 Playbook cites the actual product context, not abstract beliefs.
+
+If the user explicitly says "skip context — I want to think about this clean," respect that and proceed without grounding. But default is to ground.
+
 ### Phase 1 — Refuse and Reframe (one move)
 
 When triggered, do not answer the user's surface question. In one short turn:
@@ -68,15 +95,24 @@ When triggered, do not answer the user's surface question. In one short turn:
 2. Restate it as a belief question.
 3. Ask the single most load-bearing version of that question.
 
-Worked example (note: one question, no setup, closed-form to force a commitment):
+Worked example — **grounded form (preferred when Phase 0 found context):**
+
+If Phase 0 read a README that says *"A Claude Code skill that refuses GTM playbooks":*
+
+> User: "Help me figure out my pricing."
+> You: "Your README hero says you sell *'a Claude Code skill that refuses GTM playbooks.'* Is the buyer paying for: a tool, an outcome (less wasted GTM hours), a status (you don't follow templates), or a replacement (for hiring an advisor)?"
+
+Worked example — **fallback form (only when Phase 0 found nothing and user couldn't paste context):**
 
 > User: "Help me figure out my pricing."
 > You: "Name what your customer thinks they're buying. One of: tool, outcome, status, replacement."
 
-Next turn, after they answer:
+Next turn, after they answer (either form):
 
 > User: "An outcome."
 > You: "What outcome — in their words, not yours?"
+
+Always prefer the grounded form. The fallback is a last resort — it asks the question every founder gets asked, with no purchase on *this* founder's product. That's the failure mode the skill exists to prevent.
 
 Topic catalog (when the surface ask matches one of these, lead with the reframe):
 
